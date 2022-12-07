@@ -41,3 +41,24 @@ kind create cluster --image "Cluster Image"
 ```
 kind create cluster --config "Path to config.yaml"
 ```
+
+
+# Installing Kubectl
+#### kubectl is required in order to interact with the kubeapi-server. The API's Certificates and context information generated through kind is stored at 
+```
+$HOME/.kube/config
+```
+
+- ```curl -LO https://dl.k8s.io/release/v1.24.0/bin/linux/amd64/kubectl```
+- ```sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl```
+- ```kubectl version --client```
+- ```kubectl version --output json```
+
+
+#### Verify Cluster Access
+
+``` kubectl cluster-info```
+
+### You can also check the cluster context using
+
+```kubectl config current-context```

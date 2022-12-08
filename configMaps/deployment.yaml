@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx-deployment
+  name: nginx-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx-deployment
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: nginx-deployment
+    spec:
+      containers:
+      - image: nginx:alpine
+        name: nginx
+        resources: {}
+        volumeMounts:
+          - mountPath: /etc/nginx/conf.d/default.conf
+            name: nginx-default-conf
+            subPath: default.conf
+
+      volumes:
+        - name: nginx-default-conf
+          configMap:
+            name: nginx-config-map
+            items:
+              - key: defaultconf
+                path: default.conf
+      
+status: {}
